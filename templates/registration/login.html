@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{%block title %} 使用者登入 {% endblock %}
+{% block content %}
+{% if form.errors %}
+<p style="color:red;"> *你的帳號和密碼並不吻合，請重新輸入。</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>&emsp;這個帳號並沒有權限進行留言的使用。</p>
+    {% else %}
+    <p>&emsp;請輸入您的帳號和密碼 d(`･∀･)b</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<div>
+  <td>&emsp;帳號：</td>
+  <td>{{ form.username }}</td>
+</div>
+<br>
+<div>
+  <td>&emsp;密碼：</td>
+  <td>{{ form.password }}</td>
+</div>
+<br>
+<div>
+  &emsp;
+  <input type="reset" value="重填" />
+  <input type="submit" value="登入" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</div>
+</form>
+<br>
+{% endblock %}

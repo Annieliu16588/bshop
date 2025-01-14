@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{%block title %} 使用者註冊 {% endblock %}
+{% block content %}
+    <form method="POST" align = 'left'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.email }}
+        {% for field in form %}
+        &emsp;
+            {{ field.errors }}
+        {% endfor %}
+    &emsp;
+    <button type="reset">清除</button>
+    <button type="submit">送出</button>
+{% endblock content %}

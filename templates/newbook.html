@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{%block title %} 新書推薦 {% endblock %}
+{% block content %}
+<div class='container' align=center>
+	新書推薦
+	{% for p in products %}
+	{% if forloop.first %}
+	<table>
+		<tr bgcolor="#cccccc">
+			<td width=150>出版商</td>
+			<td width=300>書名</td>
+			<td width=200>作者</td>
+			<td width=50>出版年</td>
+			<td width=50>價格</td></tr>
+	{% endif %}
+		<tr bgcolor='{% cycle "#ffccff" "ccffcc" %}'>
+			<td>{{ p.publishing.name }}/{{ p.publishing }}</td>
+			<td><a href='{% url "detail-url" p.id  %}'>{{ p.name }}</a></td>
+			<td>{{ p.author }}</td>
+			<td>{{ p.year }}</td>
+			<td>{{ p.price }}</td>
+		</tr>
+	{% if forloop.last %}
+    </table>
+    {% endif %}
+    {% empty %}
+    <h3>本書已售罄</h3>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+  
